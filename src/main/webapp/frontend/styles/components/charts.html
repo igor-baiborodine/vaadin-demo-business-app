@@ -1,0 +1,74 @@
+<dom-module id="vaadin-chart-lumo-theme" theme-for="vaadin-chart">
+  <template>
+    <style include="vaadin-chart-default-theme">
+      /*
+      :host {
+        --vaadin-charts-color-0: #f45b5b;
+        --vaadin-charts-color-1: #91e8e1;
+        --vaadin-charts-color-2: #7cb5ec;
+        --vaadin-charts-color-3: #434348;
+        --vaadin-charts-color-4: #90ed7d;
+        --vaadin-charts-color-5: #f7a35c;
+        --vaadin-charts-color-6: #8085e9;
+        --vaadin-charts-color-7: #f15c80;
+        --vaadin-charts-color-8: #e4d354;
+        --vaadin-charts-color-9: #2b908f;
+      }
+      */
+
+      .highcharts-axis-title {
+        fill: var(--lumo-secondary-text-color);
+      }
+
+      .highcharts-axis-labels {
+        fill: var(--lumo-tertiary-text-color);
+      }
+
+      .highcharts-axis-line,
+      .highcharts-tick {
+        stroke: var(--lumo-contrast-30pct);
+      }
+
+      .highcharts-area {
+        fill-opacity: 0.5;
+      }
+
+      :host(.pending) .highcharts-color-0,
+      :host(.outstanding) .highcharts-color-0 {
+        fill: rgb(255, 194, 122);
+      }
+
+      :host(.confirmed) .highcharts-color-0,
+      :host(.paid) .highcharts-color-0 {
+        fill: var(--lumo-success-text-color);
+      }
+
+      :host(.submitted) .highcharts-color-0,
+      :host(.open) .highcharts-color-0 {
+        fill: var(--lumo-primary-text-color);
+      }
+
+      :host(.failed) .highcharts-color-0,
+      :host(.overdue) .highcharts-color-0 {
+        fill: var(--lumo-error-text-color);
+      }
+
+      .highcharts-background {
+        fill: transparent;
+      }
+
+      .highcharts-container {
+        font-family: inherit;
+      }
+
+      .highcharts-data-label {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+
+      .highcharts-yaxis-grid  {
+        display: none;
+      }
+    </style>
+  </template>
+</dom-module>

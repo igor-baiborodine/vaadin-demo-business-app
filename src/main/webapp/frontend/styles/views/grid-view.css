@@ -1,0 +1,8 @@
+.grid-view {
+  box-sizing: border-box;
+  flex: 1;
+  height: 100%;
+  padding: var(--lumo-space-r-x) var(--lumo-space-r-x) 0 var(--lumo-space-r-x);
+  transition: padding var(--transition-duration-m);
+
+}

@@ -1,0 +1,104 @@
+<link rel="import" href="../bower_components/vaadin-lumo-styles/badge.html">
+<link rel="import" href="../bower_components/vaadin-lumo-styles/color.html">
+<link rel="import" href="../bower_components/vaadin-lumo-styles/style.html">
+<link rel="import" href="../bower_components/vaadin-lumo-styles/typography.html">
+
+<link rel="stylesheet" href="lumo-border-radius.css">
+<link rel="stylesheet" href="lumo-icon-size.css">
+<link rel="stylesheet" href="lumo-margin.css">
+<link rel="stylesheet" href="lumo-padding.css">
+<link rel="stylesheet" href="lumo-shadow.css">
+<link rel="stylesheet" href="lumo-spacing.css">
+<link rel="stylesheet" href="lumo-typography.css">
+
+<link rel="stylesheet" href="components/account-switcher.css">
+<link rel="stylesheet" href="components/app-bar.css">
+<link rel="stylesheet" href="components/brand-expression.css">
+<link rel="import"     href="components/charts.html">
+<link rel="stylesheet" href="components/details-drawer.css">
+<link rel="import"     href="components/floating-action-button.html">
+<link rel="stylesheet" href="components/initials.css">
+<link rel="stylesheet" href="components/list-item.css">
+<link rel="stylesheet" href="components/navi-drawer.css">
+<link rel="import"     href="components/navi-icon.html">
+<link rel="stylesheet" href="components/navi-item.css">
+<link rel="stylesheet" href="components/navi-menu.css">
+<link rel="stylesheet" href="components/tab-bar.css">
+
+<link rel="stylesheet" href="misc/box-shadow-borders.css">
+
+<link rel="stylesheet" href="views/dashboard.css">
+<link rel="stylesheet" href="views/grid-view.css">
+<link rel="stylesheet" href="views/report-details.css">
+<link rel="stylesheet" href="views/view-frame.css">
+
+<custom-style>
+  <style include="lumo-badge">
+    :root {
+      --app-bar-height-desktop: var(--lumo-size-xl);
+      --app-bar-height-mobile: var(--lumo-size-l);
+
+      --navi-drawer-rail-width: calc(var(--lumo-size-m) * 1.75);
+      --navi-drawer-width: calc(var(--lumo-size-m) * 7);
+      --navi-item-indentation: calc(var(--lumo-icon-size-s) + var(--lumo-space-l));
+
+      --details-drawer-width: calc(var(--lumo-size-m) * 11);
+
+      --transition-duration-s: 160ms;
+      --transition-duration-m: 240ms;
+      --transition-duration-l: 320ms;
+    }
+
+    /* Responsive sizing and spacing */
+    @media (max-width: 479px) {
+      :root {
+        --lumo-space-r-m: var(--lumo-space-s);
+        --lumo-space-r-l: var(--lumo-space-m);
+        --lumo-space-r-x: 0;
+
+        --lumo-space-wide-r-m: var(--lumo-space-wide-s);
+        --lumo-space-wide-r-l: var(--lumo-space-wide-m);
+      }
+    }
+    @media (min-width: 480px) and (max-width: 1023px) {
+      :root {
+        --lumo-space-r-m: var(--lumo-space-s);
+        --lumo-space-r-l: var(--lumo-space-m);
+        --lumo-space-r-x: var(--lumo-space-m);
+
+        --lumo-space-wide-r-m: var(--lumo-space-wide-s);
+        --lumo-space-wide-r-l: var(--lumo-space-wide-m);
+      }
+    }
+    @media (min-width: 1024px) {
+      :root {
+        --lumo-space-r-m: var(--lumo-space-m);
+        --lumo-space-r-l: var(--lumo-space-l);
+        --lumo-space-r-x: var(--lumo-space-l);
+
+        --lumo-space-wide-r-m: var(--lumo-space-wide-m);
+        --lumo-space-wide-r-l: var(--lumo-space-wide-l);
+      }
+    }
+
+    html,
+    body {
+      height: 100%;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    vaadin-grid-cell-content {
+      text-overflow: ellipsis;
+    }
+
+    vaadin-text-field {
+      align-self: auto;
+    }
+
+    .app-header-outer,
+    .app-footer-outer {
+      z-index: 3;
+    }
+  </style>
+</custom-style>
