@@ -1,0 +1,27 @@
+version: 2 # use CircleCI 2.0
+jobs: 
+  build: 
+    
+    working_directory: ~/vaadin-demo-business-app
+
+    docker: 
+      - image: circleci/openjdk:8-jdk-browsers
+
+    steps: 
+
+      - checkout 
+
+      - restore_cache: 
+          key: vaadin-demo-business-app-{{ checksum "pom.xml" }}
+      
+      - run: mvn dependency:go-offline
+      
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: vaadin-demo-business-app-{{ checksum "pom.xml" }}
+      
+      - run: mvn package
+      
+      - store_test_results: 
+          path: target/surefire-reports
