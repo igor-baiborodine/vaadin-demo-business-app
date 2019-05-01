@@ -22,6 +22,16 @@ jobs:
           key: vaadin-demo-business-app-{{ checksum "pom.xml" }}
       
       - run: mvn package
-      
-      - store_test_results: 
-          path: target/surefire-reports
+          
+      - run:
+          name: Save test results
+          command: |
+            mkdir -p ~/test-results/junit/
+            find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+          when: always
+          
+      - store_test_results:
+          path: ~/test-results
+          
+      - store_artifacts:
+          path: ~/test-results/junit      
