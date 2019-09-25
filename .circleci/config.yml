@@ -20,7 +20,9 @@ jobs:
           paths:
             - ~/.m2
           key: vaadin-demo-business-app-{{ checksum "pom.xml" }}
-      
+
+      - run: mvn com.github.eirslett:frontend-maven-plugin:1.7.6:install-node-and-npm -DnodeVersion="v10.16.0"
+
       - run: mvn package
           
       - run:
