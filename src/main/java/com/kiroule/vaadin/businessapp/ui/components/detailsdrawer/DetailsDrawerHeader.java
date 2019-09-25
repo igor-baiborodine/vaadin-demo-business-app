@@ -1,34 +1,53 @@
 package com.kiroule.vaadin.businessapp.ui.components.detailsdrawer;
 
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.tabs.Tabs;
+import com.kiroule.vaadin.businessapp.ui.components.FlexBoxLayout;
+import com.kiroule.vaadin.businessapp.ui.layout.size.Horizontal;
+import com.kiroule.vaadin.businessapp.ui.layout.size.Right;
+import com.kiroule.vaadin.businessapp.ui.layout.size.Vertical;
 import com.kiroule.vaadin.businessapp.ui.util.BoxShadowBorders;
-import com.kiroule.vaadin.businessapp.ui.util.LumoStyles;
 import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
-import com.kiroule.vaadin.businessapp.ui.util.css.BoxSizing;
+import com.kiroule.vaadin.businessapp.ui.util.css.FlexDirection;
 
-public class DetailsDrawerHeader extends Label {
+public class DetailsDrawerHeader extends FlexBoxLayout {
 
-    public DetailsDrawerHeader(String title, boolean tabs) {
-        super(title);
+	private Button close;
+	private Label title;
 
-        // Default styling
-        addClassNames(LumoStyles.Heading.H3,
-                LumoStyles.Padding.Responsive.Horizontal.L,
-                LumoStyles.Padding.Top.L);
-        UIUtils.setBoxSizing(BoxSizing.BORDER_BOX, this);
-        setWidth("100%");
+	public DetailsDrawerHeader(String title) {
+		addClassName(BoxShadowBorders.BOTTOM);
+		setFlexDirection(FlexDirection.COLUMN);
+		setWidthFull();
 
-        // Styling based on whether this component will share the DetailsDrawer
-        // header slot with Tabs
-        if (tabs) {
-            addClassName(LumoStyles.Padding.Bottom.M);
-        } else {
-            addClassNames(BoxShadowBorders.BOTTOM, LumoStyles.Padding.Bottom.L);
-        }
-    }
+		this.close = UIUtils.createTertiaryInlineButton(VaadinIcon.CLOSE);
+		UIUtils.setLineHeight("1", this.close);
 
-    public DetailsDrawerHeader(String title) {
-        this(title, false);
-    }
+		this.title = UIUtils.createH4Label(title);
+
+		FlexBoxLayout wrapper = new FlexBoxLayout(this.close, this.title);
+		wrapper.setAlignItems(FlexComponent.Alignment.CENTER);
+		wrapper.setPadding(Horizontal.RESPONSIVE_L, Vertical.M);
+		wrapper.setSpacing(Right.L);
+		add(wrapper);
+	}
+
+	public DetailsDrawerHeader(String title, Tabs tabs) {
+		this(title);
+		add(tabs);
+	}
+
+	public void setTitle(String title) {
+		this.title.setText(title);
+	}
+
+	public void addCloseListener(ComponentEventListener<ClickEvent<Button>> listener) {
+		this.close.addClickListener(listener);
+	}
 
 }

@@ -5,7 +5,6 @@
   max-height: 100%;
   max-width: 100%;
   overflow: hidden;
-  /* transition: all var(--transition-duration-s); */
   z-index: 0;
 }
 
@@ -15,6 +14,10 @@
 
 .details-drawer__header {
   flex-shrink: 0;
+}
+
+.details-drawer__header vaadin-tabs {
+  box-shadow: none;
 }
 
 .details-drawer__content {

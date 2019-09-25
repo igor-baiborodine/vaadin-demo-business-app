@@ -1,6 +1,9 @@
 .tab-bar {
   align-items: center;
-  box-shadow: var(--lumo-box-shadow-m);
+  background-color: var(--lumo-base-color);
+  box-shadow: var(--lumo-box-shadow-s);
+  padding-left: var(--lumo-space-r-l);
+  padding-right: var(--lumo-space-r-l);
   position: relative;
   z-index: 1;
 }
@@ -20,7 +23,9 @@
 }
 
 .tab-bar__tab vaadin-button {
-  margin: 0;
+  margin-bottom: 0;
+  margin-left: var(--lumo-space-s);
+  margin-top: 0;
 }
 
 .tab-bar__add-tab {
@@ -29,10 +34,10 @@
 
 @media (max-width: 719px) {
   .tab-bar__add-tab,
+  vaadin-tab[closable]::after,
+  vaadin-tab[closable]::before,
   vaadin-tab[closable]:not([selected]),
-  vaadin-tab[closable] vaadin-button,
-  vaadin-tab[closable]:after,
-  vaadin-tab[closable]:before {
+  vaadin-tab[closable] vaadin-button {
     display: none;
   }
 
@@ -43,26 +48,8 @@
   }
 }
 
-@media (max-width: 1023px) {
-  .tab-bar {
-    padding: 0 var(--lumo-space-m);
-  }
-
-  .tab-bar__action-items > *:not(:last-child) {
-    margin-right: var(--lumo-space-s);
-  }
-}
-
 @media (min-width: 1024px) {
-  .tab-bar {
-    padding: 0 var(--lumo-space-l);
-  }
-
   .tab-bar__navi-icon {
     display: none;
-  }
-
-  .tab-bar__action-items > *:not(:last-child) {
-    margin-right: var(--lumo-space-m);
   }
 }

@@ -1,9 +1,8 @@
 package com.kiroule.vaadin.businessapp.it;
 
+import com.vaadin.flow.component.html.testbench.DivElement;
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.vaadin.flow.component.html.testbench.DivElement;
 
 public class HomeIT extends AbstractIT {
 

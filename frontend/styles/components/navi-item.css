@@ -9,22 +9,22 @@
 
 /* Sub items */
 .navi-item[level] {
-  background-color: var(--lumo-contrast-5pct);
   font-size: var(--lumo-font-size-xs);
   font-weight: normal;
   height: var(--lumo-size-m);
 }
 
-.navi-item[level="1"] label {
+.navi-item[level="1"] span {
   font-weight: 500;
   margin-left: var(--navi-item-indentation);
 }
 
-.navi-item[level="2"] label {
+.navi-item[level="2"] span {
+  font-weight: 400;
   margin-left: calc(var(--navi-item-indentation) + var(--lumo-space-m));
 }
 
-.navi-item[level="3"] label {
+.navi-item[level="3"] span {
   font-weight: 300;
   margin-left: calc(var(--navi-item-indentation) + calc(var(--lumo-space-m) * 2));
 }
@@ -50,10 +50,15 @@
   flex-grow: 1;
   height: 100%;
   overflow: hidden;
-  padding: 0 var(--lumo-space-m);
+  padding-left: var(--lumo-space-m);
+  padding-right: var(--lumo-space-m);
 }
 
-/* Link highlight */
+/* Highlight */
+.navi-item__link[highlight] {
+  background-color: var(--lumo-primary-color-10pct);
+}
+
 .navi-item__link:not([highlight]) {
   color: var(--lumo-body-text-color);
 }
@@ -62,7 +67,7 @@
   color: var(--lumo-tertiary-text-color);
 }
 
-/* Link icon */
+/* Icon */
 .navi-item__link iron-icon {
   height: var(--lumo-icon-size-s);
   flex-shrink: 0;
@@ -71,12 +76,8 @@
   width: var(--lumo-icon-size-s);
 }
 
-.navi-item__link > div:first-child {
-  display: flex;
-}
-
-/* Link label */
-.navi-item__link label {
+/* Text */
+.navi-item__link span {
   cursor: inherit;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -85,7 +86,7 @@
   white-space: nowrap;
 }
 
-/* Expand & collapse button */
+/* Expand & collapse */
 .navi-item vaadin-button {
   flex-shrink: 0;
   margin-left: auto;

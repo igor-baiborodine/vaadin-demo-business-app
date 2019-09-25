@@ -4,6 +4,7 @@ import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasStyle;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.kiroule.vaadin.businessapp.ui.MainLayout;
 import com.kiroule.vaadin.businessapp.ui.components.FlexBoxLayout;
@@ -19,77 +20,89 @@ import com.kiroule.vaadin.businessapp.ui.util.css.FlexDirection;
  * <li>Bottom {@link #setViewFooter(Component...) footer}</li>
  * </ul>
  */
+@CssImport("./styles/components/view-frame.css")
 public class SplitViewFrame extends Composite<Div> implements HasStyle {
 
-    private final String CLASS_NAME = "view-frame";
+	private String CLASS_NAME = "view-frame";
 
-    private final Div header = new Div();
-    private final FlexBoxLayout wrapper = new FlexBoxLayout();
-    private final Div content = new Div();
-    private final Div details = new Div();
-    private final Div footer = new Div();
+	private Div header;
 
-    public enum Position {
-        RIGHT, BOTTOM
-    }
+	private FlexBoxLayout wrapper;
+	private Div content;
+	private Div details;
 
-    public SplitViewFrame() {
-        setClassName(CLASS_NAME);
+	private Div footer;
 
-        header.setClassName(CLASS_NAME + "__header");
-        wrapper.setClassName(CLASS_NAME + "__wrapper");
-        content.setClassName(CLASS_NAME + "__content");
-        details.setClassName(CLASS_NAME + "__details");
-        footer.setClassName(CLASS_NAME + "__footer");
+	public enum Position {
+		RIGHT, BOTTOM
+	}
 
-        wrapper.add(content, details);
-        getContent().add(header, wrapper, footer);
-    }
+	public SplitViewFrame() {
+		setClassName(CLASS_NAME);
 
-    /**
-     * Sets the header slot's components.
-     */
-    public void setViewHeader(Component... components) {
-        header.removeAll();
-        header.add(components);
-    }
+		header = new Div();
+		header.setClassName(CLASS_NAME + "__header");
 
-    /**
-     * Sets the content slot's components.
-     */
-    public void setViewContent(Component... components) {
-        content.removeAll();
-        content.add(components);
-    }
+		wrapper = new FlexBoxLayout();
+		wrapper.setClassName(CLASS_NAME + "__wrapper");
 
-    /**
-     * Sets the detail slot's components.
-     */
-    public void setViewDetails(Component... components) {
-        details.removeAll();
-        details.add(components);
-    }
+		content = new Div();
+		content.setClassName(CLASS_NAME + "__content");
 
-    public void setViewDetailsPosition(Position position) {
-        if (position.equals(Position.RIGHT)) {
-            wrapper.setFlexDirection(FlexDirection.ROW);
+		details = new Div();
+		details.setClassName(CLASS_NAME + "__details");
 
-        } else if (position.equals(Position.BOTTOM)) {
-            wrapper.setFlexDirection(FlexDirection.COLUMN);
-        }
-    }
+		footer = new Div();
+		footer.setClassName(CLASS_NAME + "__footer");
 
-    /**
-     * Sets the footer slot's components.
-     */
-    public void setViewFooter(Component... components) {
-        footer.removeAll();
-        footer.add(components);
-    }
+		wrapper.add(content, details);
+		getContent().add(header, wrapper, footer);
+	}
 
-    @Override
-    protected void onAttach(AttachEvent attachEvent) {
-        super.onAttach(attachEvent);
-        MainLayout.get().getAppBar().reset();
-    }
+	/**
+	 * Sets the header slot's components.
+	 */
+	public void setViewHeader(Component... components) {
+		header.removeAll();
+		header.add(components);
+	}
+
+	/**
+	 * Sets the content slot's components.
+	 */
+	public void setViewContent(Component... components) {
+		content.removeAll();
+		content.add(components);
+	}
+
+	/**
+	 * Sets the detail slot's components.
+	 */
+	public void setViewDetails(Component... components) {
+		details.removeAll();
+		details.add(components);
+	}
+
+	public void setViewDetailsPosition(Position position) {
+		if (position.equals(Position.RIGHT)) {
+			wrapper.setFlexDirection(FlexDirection.ROW);
+
+		} else if (position.equals(Position.BOTTOM)) {
+			wrapper.setFlexDirection(FlexDirection.COLUMN);
+		}
+	}
+
+	/**
+	 * Sets the footer slot's components.
+	 */
+	public void setViewFooter(Component... components) {
+		footer.removeAll();
+		footer.add(components);
+	}
+
+	@Override
+	protected void onAttach(AttachEvent attachEvent) {
+		super.onAttach(attachEvent);
+		MainLayout.get().getAppBar().reset();
+	}
 }

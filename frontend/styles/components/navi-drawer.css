@@ -1,5 +1,6 @@
+
 .navi-drawer {
-  z-index: 3;
+  z-index: 2;
 }
 
 .navi-drawer[open] + * {
@@ -9,7 +10,7 @@
 /* Scrim */
 .navi-drawer__scrim {
   animation: var(--transition-duration-m) lumo-overlay-backdrop-enter both;
-  background: var(--lumo-shade-20pct);
+  background-color: var(--lumo-shade-20pct);
   bottom: 0;
   opacity: 0;
   pointer-events: none;
@@ -22,7 +23,7 @@
 /* Content */
 .navi-drawer__content {
   background-color: var(--lumo-base-color);
-  box-shadow: var(--lumo-box-shadow-m);
+  box-shadow: var(--lumo-box-shadow-s);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -30,11 +31,12 @@
   position: relative;
   transition: margin var(--transition-duration-m);
   width: var(--navi-drawer-width);
+  z-index: 2;
 }
 
 /* Search */
 .navi-drawer vaadin-text-field {
-  box-shadow: inset 0 -1px var(--lumo-contrast-20pct);
+  box-shadow: inset 0 -1px var(--lumo-contrast-10pct);
   box-sizing: border-box;
   padding: var(--lumo-space-m);
   width: 100%;
@@ -42,7 +44,7 @@
 
 /* Scrollable area */
 .navi-drawer__scroll-area {
-  box-shadow: inset 0 -1px var(--lumo-contrast-20pct);
+  box-shadow: inset 0 -1px var(--lumo-contrast-10pct);
   flex: 1;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
@@ -51,7 +53,8 @@
 /* Footer button */
 .navi-drawer__footer {
   border-radius: 0;
-  margin: auto 0 0 0;
+  margin-bottom: 0;
+  margin-top: auto;
   min-width: 0;
 }
 
@@ -73,7 +76,6 @@
 .navi-drawer[rail]:not([open]) + .root__column {
   padding-left: var(--navi-drawer-rail-width);
 }
-
 
 @media (max-width: 1023px) {
   /* Show scrim when drawer is open */
@@ -106,18 +108,44 @@
 }
 
 @media (min-width: 1024px) {
-  .navi-drawer[rail]:not([open]):not(:hover) .navi-item__link iron-icon,
-  .navi-drawer[rail]:not([open]):not(:hover) .account-switcher__avatar {
+  .navi-drawer[rail]:not([open]):not(:hover) .account-switcher__avatar,
+  .navi-drawer[rail]:not([open]):not(:hover) .navi-item__link iron-icon {
     margin-left: auto;
     margin-right: auto;
   }
 
-  .navi-drawer[rail]:not([open]):not(:hover) .navi-item__link label,
-  .navi-drawer[rail]:not([open]):not(:hover) .navi-item vaadin-button,
-  .navi-drawer[rail]:not([open]):not(:hover) .navi-item[level],
-  .navi-drawer[rail]:not([open]):not(:hover) .navi-drawer__footer span,
   .navi-drawer[rail]:not([open]):not(:hover) .account-switcher__title,
-  .navi-drawer[rail]:not([open]):not(:hover) .account-switcher__email {
+  .navi-drawer[rail]:not([open]):not(:hover) .account-switcher__email,
+  .navi-drawer[rail]:not([open]):not(:hover) .brand-expression__title,
+  .navi-drawer[rail]:not([open]):not(:hover) .navi-item[level],
+  .navi-drawer[rail]:not([open]):not(:hover) .navi-item__link span,
+  .navi-drawer[rail]:not([open]):not(:hover) .navi-item vaadin-button {
     display: none;
+  }
+
+  .navi-drawer[rail]:not([open]):not(:hover) .navi-drawer__footer iron-icon {
+    margin-left: 0.25em;
+    margin-right: -0.25em;
+    width: var(--navi-drawer-rail-width);
+  }
+}
+
+/* === IE 11 workarounds === */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .navi-drawer__scrim,
+  .navi-drawer__content {
+    /* z-index is needed on each level for IE11 support. */
+    z-index: 2
+  }
+
+  .brand-expression .h3 {
+    font-size: 1.375rem;
+  }
+}
+
+@media all and (max-width: 1023px) and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .navi-drawer:not([open]) .navi-drawer__content {
+    /* IE11 doesn't understand nested calculations. */
+    margin-left: -18.9rem;
   }
 }

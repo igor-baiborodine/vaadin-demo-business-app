@@ -4,53 +4,53 @@ import java.time.LocalDate;
 
 public class Invoice {
 
-    private final Long id;
-    private final Status status;
-    private final Order order;
-    private final LocalDate invoiceDate;
-    private final LocalDate dueDate;
+	private final Long id;
+	private final Status status;
+	private final Order order;
+	private final LocalDate invoiceDate;
+	private final LocalDate dueDate;
 
-    public enum Status {
-        OUTSTANDING("Outstanding"), OPEN("Open"), PAID("Paid"), OVERDUE(
-                "Overdue");
+	public enum Status {
+		OUTSTANDING("Outstanding"), OPEN("Open"), PAID("Paid"), OVERDUE(
+				"Overdue");
 
-        private String name;
+		private String name;
 
-        Status(String name) {
-            this.name = name;
-        }
+		Status(String name) {
+			this.name = name;
+		}
 
-        public String getName() {
-            return name;
-        }
-    }
+		public String getName() {
+			return name;
+		}
+	}
 
-    public Invoice(Long id, Status status, Order order, LocalDate invoiceDate,
-            LocalDate dueDate) {
-        this.id = id;
-        this.status = status;
-        this.order = order;
-        this.invoiceDate = invoiceDate;
-        this.dueDate = dueDate;
-    }
+	public Invoice(Long id, Status status, Order order, LocalDate invoiceDate,
+	               LocalDate dueDate) {
+		this.id = id;
+		this.status = status;
+		this.order = order;
+		this.invoiceDate = invoiceDate;
+		this.dueDate = dueDate;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Status getStatus() {
-        return status;
-    }
+	public Status getStatus() {
+		return status;
+	}
 
-    public Order getOrder() {
-        return order;
-    }
+	public Order getOrder() {
+		return order;
+	}
 
-    public LocalDate getInvoiceDate() {
-        return invoiceDate;
-    }
+	public LocalDate getInvoiceDate() {
+		return invoiceDate;
+	}
 
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
+	public LocalDate getDueDate() {
+		return dueDate;
+	}
 }

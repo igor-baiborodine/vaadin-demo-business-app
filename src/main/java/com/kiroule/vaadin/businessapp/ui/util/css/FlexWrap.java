@@ -2,15 +2,15 @@ package com.kiroule.vaadin.businessapp.ui.util.css;
 
 public enum FlexWrap {
 
-    NO_WRAP("nowrap"), WRAP("wrap"), WRAP_REVERSE("wrap-reverse");
+	NO_WRAP("nowrap"), WRAP("wrap"), WRAP_REVERSE("wrap-reverse");
 
-    private String value;
+	private String value;
 
-    FlexWrap(String value) {
-        this.value = value;
-    }
+	FlexWrap(String value) {
+		this.value = value;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public String getValue() {
+		return value;
+	}
 }

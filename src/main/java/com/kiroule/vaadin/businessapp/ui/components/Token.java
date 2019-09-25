@@ -1,9 +1,5 @@
 package com.kiroule.vaadin.businessapp.ui.components;
 
-import static com.vaadin.flow.component.button.ButtonVariant.LUMO_ICON;
-
-import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
@@ -18,26 +14,22 @@ import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
 import com.kiroule.vaadin.businessapp.ui.util.css.BorderRadius;
 import com.kiroule.vaadin.businessapp.ui.util.css.Display;
 
-public class Token extends Composite<FlexBoxLayout> implements HasStyle {
+public class Token extends FlexBoxLayout {
 
-    private final String CLASS_NAME = "token";
+	private final String CLASS_NAME = "token";
 
-    public Token(String text) {
-        addClassName(CLASS_NAME);
-        getContent().setAlignItems(FlexComponent.Alignment.CENTER);
-        getContent().setBackgroundColor(LumoStyles.Color.Primary._10);
-        getContent().setBorderRadius(BorderRadius.M);
-        getContent().setDisplay(Display.INLINE_FLEX);
-        getContent().setPadding(Left.S);
-        getContent().setPadding(Right.XS);
-        getContent().setSpacing(Right.XS);
+	public Token(String text) {
+		setAlignItems(FlexComponent.Alignment.CENTER);
+		setBackgroundColor(LumoStyles.Color.Primary._10);
+		setBorderRadius(BorderRadius.M);
+		setClassName(CLASS_NAME);
+		setDisplay(Display.INLINE_FLEX);
+		setPadding(Left.S, Right.XS);
+		setSpacing(Right.XS);
 
-        Label label = UIUtils.createLabel(FontSize.S, TextColor.BODY, text);
-        Button button = UIUtils.createButton(VaadinIcon.CLOSE_SMALL,
-                ButtonVariant.LUMO_SMALL, ButtonVariant.LUMO_TERTIARY_INLINE);
-        button.getThemeNames().remove(LUMO_ICON.getVariantName());
-
-        getContent().add(label, button);
-    }
+		Label label = UIUtils.createLabel(FontSize.S, TextColor.BODY, text);
+		Button button = UIUtils.createButton(VaadinIcon.CLOSE_SMALL, ButtonVariant.LUMO_SMALL, ButtonVariant.LUMO_TERTIARY_INLINE);
+		add(label, button);
+	}
 
 }

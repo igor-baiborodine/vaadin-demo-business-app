@@ -139,6 +139,6 @@ buildNumber.properties
 ### Vaadin ###
 .vaadin-designer
 .designer
-
+webpack.*
 
 # End of https://www.gitignore.io/api/maven,vaadin,eclipse,intellij

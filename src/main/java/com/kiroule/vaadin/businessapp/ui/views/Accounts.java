@@ -1,94 +1,232 @@
 package com.kiroule.vaadin.businessapp.ui.views;
 
-import java.time.format.DateTimeFormatter;
-
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.DetachEvent;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.page.Page;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.data.renderer.LocalDateRenderer;
 import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.ParentLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.shared.Registration;
 import com.kiroule.vaadin.businessapp.backend.BankAccount;
 import com.kiroule.vaadin.businessapp.backend.DummyData;
 import com.kiroule.vaadin.businessapp.ui.MainLayout;
+import com.kiroule.vaadin.businessapp.ui.components.Badge;
+import com.kiroule.vaadin.businessapp.ui.components.FlexBoxLayout;
 import com.kiroule.vaadin.businessapp.ui.components.ListItem;
-import com.kiroule.vaadin.businessapp.ui.util.TextColor;
-import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
+import com.kiroule.vaadin.businessapp.ui.layout.size.Horizontal;
+import com.kiroule.vaadin.businessapp.ui.layout.size.Right;
+import com.kiroule.vaadin.businessapp.ui.layout.size.Top;
+import com.kiroule.vaadin.businessapp.ui.layout.size.Vertical;
+import com.kiroule.vaadin.businessapp.ui.util.*;
+import com.kiroule.vaadin.businessapp.ui.util.css.*;
+import com.kiroule.vaadin.businessapp.ui.util.css.lumo.BadgeColor;
+import com.kiroule.vaadin.businessapp.ui.util.css.lumo.BadgeShape;
+import com.kiroule.vaadin.businessapp.ui.util.css.lumo.BadgeSize;
 
-@Route(value = "accounts", layout = MainLayout.class)
-@ParentLayout(MainLayout.class)
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 @PageTitle("Accounts")
-public class Accounts extends ViewFrame implements RouterLayout {
+@Route(value = "accounts", layout = MainLayout.class)
+public class Accounts extends ViewFrame {
 
-    private Grid<BankAccount> grid;
+	public static final int MOBILE_BREAKPOINT = 480;
+	private Grid<BankAccount> grid;
+	private Registration resizeListener;
 
-    public Accounts() {
-        setViewContent(createContent());
-    }
+	public Accounts() {
+		setViewContent(createContent());
+	}
 
-    private Component createContent() {
-        Div content = new Div(createGrid());
-        content.addClassName("grid-view");
-        return content;
-    }
+	private Component createContent() {
+		FlexBoxLayout content = new FlexBoxLayout(createGrid());
+		content.setBoxSizing(BoxSizing.BORDER_BOX);
+		content.setHeightFull();
+		content.setPadding(Horizontal.RESPONSIVE_X, Top.RESPONSIVE_X);
+		return content;
+	}
 
-    private Grid createGrid() {
-        grid = new Grid<>();
-        grid.setId("accounts");
-        grid.addSelectionListener(event -> event.getFirstSelectedItem()
-                .ifPresent(this::viewDetails));
-        grid.setDataProvider(
-                DataProvider.ofCollection(DummyData.getBankAccounts()));
-        grid.setSizeFull();
+	private Grid createGrid() {
+		grid = new Grid<>();
+		grid.addSelectionListener(event -> event.getFirstSelectedItem().ifPresent(this::viewDetails));
+		grid.addThemeName("mobile");
+		grid.setDataProvider(DataProvider.ofCollection(DummyData.getBankAccounts()));
+		grid.setId("accounts");
+		grid.setSizeFull();
 
-        grid.addColumn(BankAccount::getId).setFlexGrow(0).setFrozen(true)
-                .setHeader("ID").setSortable(true)
-                .setWidth(UIUtils.COLUMN_WIDTH_XS).setResizable(true);
-        grid.addColumn(new ComponentRenderer<>(this::createBankInfo))
-                .setHeader("Bank Account").setWidth(UIUtils.COLUMN_WIDTH_XL)
-                .setResizable(true);
-        grid.addColumn(BankAccount::getOwner).setHeader("Owner")
-                .setWidth(UIUtils.COLUMN_WIDTH_XL).setResizable(true);
-        grid.addColumn(new ComponentRenderer<>(this::createAvailability))
-                .setFlexGrow(0).setHeader("Availability ($)").setWidth("130px")
-                .setResizable(true).setTextAlign(ColumnTextAlign.END);
-        grid.addColumn(new LocalDateRenderer<>(BankAccount::getUpdated,
-                DateTimeFormatter.ofPattern("MMM dd, YYYY")))
-                .setComparator(BankAccount::getUpdated).setFlexGrow(0)
-                .setHeader("Updated").setWidth(UIUtils.COLUMN_WIDTH_M)
-                .setResizable(true);
+		// "Mobile" column
+		grid.addColumn(new ComponentRenderer<>(this::getMobileTemplate))
+				.setVisible(false);
 
-        return grid;
-    }
+		// "Desktop" columns
+		grid.addColumn(BankAccount::getId)
+				.setAutoWidth(true)
+				.setFlexGrow(0)
+				.setFrozen(true)
+				.setHeader("ID")
+				.setSortable(true);
+		grid.addColumn(new ComponentRenderer<>(this::createOwnerInfo))
+				.setHeader("Owner")
+				.setSortable(true)
+				.setWidth("200px");
+		grid.addColumn(new ComponentRenderer<>(this::createBankInfo))
+				.setComparator(BankAccount::getAccount)
+				.setHeader("Bank Account")
+				.setWidth("200px");
+		grid.addColumn(new ComponentRenderer<>(this::createAvailability))
+				.setAutoWidth(true)
+				.setComparator(BankAccount::getAvailability)
+				.setFlexGrow(0)
+				.setHeader("Availability ($)")
+				.setTextAlign(ColumnTextAlign.END);
+		grid.addColumn(new LocalDateRenderer<>(BankAccount::getUpdated, DateTimeFormatter.ofPattern("MMM dd, YYYY")))
+				.setAutoWidth(true)
+				.setComparator(BankAccount::getUpdated)
+				.setFlexGrow(0)
+				.setHeader("Updated");
 
-    private Component createBankInfo(BankAccount bankAccount) {
-        ListItem item = new ListItem(bankAccount.getAccount(),
-                bankAccount.getBank());
-        item.setHorizontalPadding(false);
-        return item;
-    }
+		return grid;
+	}
 
-    private Component createAvailability(BankAccount bankAccount) {
-        Double availability = bankAccount.getAvailability();
-        Label label = UIUtils.createAmountLabel(availability);
+	private BankAccountMobileTemplate getMobileTemplate(BankAccount bankAccount) {
+		return new BankAccountMobileTemplate(bankAccount);
+	}
 
-        if (availability > 0) {
-            UIUtils.setTextColor(TextColor.SUCCESS, label);
-        } else {
-            UIUtils.setTextColor(TextColor.ERROR, label);
-        }
+	private Component createOwnerInfo(BankAccount bankAccount) {
+		ListItem item = new ListItem(bankAccount.getOwner());
+		item.setPadding(Vertical.XS);
+		item.setPrefix(DummyData.getLogo());
+		item.setSpacing(Right.M);
+		return item;
+	}
 
-        return label;
-    }
+	private Component createBankInfo(BankAccount bankAccount) {
+		ListItem item = new ListItem(bankAccount.getAccount(), bankAccount.getBank());
+		item.setPadding(Vertical.XS);
+		return item;
+	}
 
-    private void viewDetails(BankAccount bankAccount) {
-        UI.getCurrent().navigate(AccountDetails.class, bankAccount.getId());
-    }
+	private Label createAvailability(BankAccount bankAccount) {
+		Double availability = bankAccount.getAvailability();
+		Label amountLabel = UIUtils.createAmountLabel(availability);
+		if (availability > 0) {
+			UIUtils.setTextColor(TextColor.SUCCESS, amountLabel);
+		} else {
+			UIUtils.setTextColor(TextColor.ERROR, amountLabel);
+		}
+		return amountLabel;
+	}
+
+	private void viewDetails(BankAccount bankAccount) {
+		UI.getCurrent().navigate(AccountDetails.class, bankAccount.getId());
+	}
+
+	@Override
+	protected void onAttach(AttachEvent attachEvent) {
+		super.onAttach(attachEvent);
+		getUI().ifPresent(ui -> {
+			Page page = ui.getPage();
+			resizeListener = page.addBrowserWindowResizeListener(event -> updateVisibleColumns(event.getWidth()));
+			page.retrieveExtendedClientDetails(details -> updateVisibleColumns(details.getBodyClientWidth()));
+		});
+	}
+
+	@Override
+	protected void onDetach(DetachEvent detachEvent) {
+		resizeListener.remove();
+		super.onDetach(detachEvent);
+	}
+
+	private void updateVisibleColumns(int width) {
+		boolean mobile = width < MOBILE_BREAKPOINT;
+		List<Grid.Column<BankAccount>> columns = grid.getColumns();
+
+		// "Mobile" column
+		columns.get(0).setVisible(mobile);
+
+		// "Desktop" columns
+		for (int i = 1; i < columns.size(); i++) {
+			columns.get(i).setVisible(!mobile);
+		}
+	}
+
+	/**
+	 * A layout for displaying BankAccount info in a mobile friendly format.
+	 */
+	private class BankAccountMobileTemplate extends FlexBoxLayout {
+
+		private BankAccount bankAccount;
+
+		public BankAccountMobileTemplate(BankAccount bankAccount) {
+			this.bankAccount = bankAccount;
+
+			UIUtils.setLineHeight(LineHeight.M, this);
+			UIUtils.setPointerEvents(PointerEvents.NONE, this);
+
+			setPadding(Vertical.S);
+			setSpacing(Right.L);
+
+			Image logo = getLogo();
+			FlexBoxLayout owner = getOwner();
+			Label account = getAccount();
+			FlexBoxLayout availability = getAvailability();
+
+			FlexBoxLayout column = new FlexBoxLayout(owner, account, availability);
+			column.setFlexDirection(FlexDirection.COLUMN);
+			column.setOverflow(Overflow.HIDDEN);
+
+			add(logo, column);
+			setFlexGrow(1, column);
+		}
+
+		private Image getLogo() {
+			Image logo = DummyData.getLogo();
+			setFlexShrink("0", logo);
+			logo.setHeight(LumoStyles.IconSize.M);
+			logo.setWidth(LumoStyles.IconSize.M);
+			return logo;
+		}
+
+		private FlexBoxLayout getOwner() {
+			Label owner = UIUtils.createLabel(FontSize.M, TextColor.BODY, bankAccount.getOwner());
+			UIUtils.setOverflow(Overflow.HIDDEN, owner);
+			UIUtils.setTextOverflow(TextOverflow.ELLIPSIS, owner);
+
+			Badge id = new Badge(String.valueOf(bankAccount.getId()), BadgeColor.NORMAL, BadgeSize.S, BadgeShape.PILL);
+
+			FlexBoxLayout wrapper = new FlexBoxLayout(owner, id);
+			wrapper.setAlignItems(Alignment.CENTER);
+			wrapper.setFlexGrow(1, owner);
+			wrapper.setFlexShrink("0", id);
+			wrapper.setSpacing(Right.M);
+			return wrapper;
+		}
+
+		private Label getAccount() {
+			Label account = UIUtils.createLabel(FontSize.S, TextColor.SECONDARY, bankAccount.getAccount());
+			account.addClassNames(LumoStyles.Margin.Bottom.S);
+			UIUtils.setOverflow(Overflow.HIDDEN, account);
+			UIUtils.setTextOverflow(TextOverflow.ELLIPSIS, account);
+			return account;
+		}
+
+		private FlexBoxLayout getAvailability() {
+			Label availability = createAvailability(bankAccount);
+			availability.setText("$" + availability.getText());
+			Label updated = UIUtils.createLabel(FontSize.XS, TextColor.TERTIARY, UIUtils.formatDate(bankAccount.getUpdated()));
+
+			FlexBoxLayout wrapper = new FlexBoxLayout(availability, updated);
+			wrapper.setAlignItems(Alignment.BASELINE);
+			wrapper.setFlexGrow(1, availability);
+			return wrapper;
+		}
+	}
 }

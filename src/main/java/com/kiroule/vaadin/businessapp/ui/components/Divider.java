@@ -1,33 +1,32 @@
 package com.kiroule.vaadin.businessapp.ui.components;
 
-import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.HasSize;
+import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.kiroule.vaadin.businessapp.ui.util.LumoStyles;
 import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
 
-public class Divider extends Composite<FlexLayout> {
+public class Divider extends FlexBoxLayout implements HasSize, HasStyle {
 
-    private final String CLASS_NAME = "divider";
+	private String CLASS_NAME = "divider";
 
-    private final Div divider;
+	private Div divider;
 
-    public Divider(String height) {
-        this(FlexComponent.Alignment.CENTER, height);
-    }
+	public Divider(String height) {
+		this(FlexComponent.Alignment.CENTER, height);
+	}
 
-    public Divider(FlexComponent.Alignment alignItems, String height) {
-        getContent().addClassName(CLASS_NAME);
+	public Divider(FlexComponent.Alignment alignItems, String height) {
+		setAlignItems(alignItems);
+		setClassName(CLASS_NAME);
+		setHeight(height);
 
-        getContent().setAlignItems(alignItems);
-        getContent().setHeight(height);
-
-        divider = new Div();
-        UIUtils.setBackgroundColor(LumoStyles.Color.Contrast._20, divider);
-        divider.setHeight("1px");
-        divider.setWidth("100%");
-        getContent().add(divider);
-    }
+		divider = new Div();
+		UIUtils.setBackgroundColor(LumoStyles.Color.Contrast._10, divider);
+		divider.setHeight("1px");
+		divider.setWidthFull();
+		add(divider);
+	}
 
 }

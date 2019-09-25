@@ -2,18 +2,18 @@ package com.kiroule.vaadin.businessapp.ui.util.css;
 
 public enum BorderRadius {
 
-    S("var(--lumo-border-radius-s)"), M("var(--lumo-border-radius-m)"), L(
-            "var(--lumo-border-radius-l)"),
+	S("var(--lumo-border-radius-s)"), M("var(--lumo-border-radius-m)"), L(
+			"var(--lumo-border-radius-l)"),
 
-    _50("50%");
+	_50("50%");
 
-    private String value;
+	private String value;
 
-    BorderRadius(String value) {
-        this.value = value;
-    }
+	BorderRadius(String value) {
+		this.value = value;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public String getValue() {
+		return value;
+	}
 }
