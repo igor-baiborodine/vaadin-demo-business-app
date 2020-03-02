@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
 @CssImport("./styles/misc/box-shadow-borders.css")
 @CssImport(value = "./styles/styles.css", include = "lumo-badge")
 @JsModule("@vaadin/vaadin-lumo-styles/badge")
-@PWA(name = "vaadin-demo-business-app", shortName = "vaadin-demo-business-app", iconPath = "images/logo-18.png", backgroundColor = "#233348", themeColor = "#233348")
+@PWA(name = "Vaadin Demo Business App", shortName = "Vaadin Demo Business App", iconPath = "images/logo-18.png", backgroundColor = "#233348", themeColor = "#233348")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends FlexBoxLayout
 		implements RouterLayout, PageConfigurator, AfterNavigationObserver {

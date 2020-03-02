@@ -76,9 +76,9 @@ public class NaviDrawer extends Div
 		add(mainContent);
 	}
 
-    private void initHeader() {
-        mainContent.add(new BrandExpression("Vaadin Demo Business App"));
-    }
+	private void initHeader() {
+		mainContent.add(new BrandExpression("Vaadin Demo Business App"));
+	}
 
 	private void initSearch() {
 		search = new TextField();

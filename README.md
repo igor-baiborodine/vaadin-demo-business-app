@@ -8,6 +8,7 @@
 * **V13** - Vaadin 13
 
 ### Updates
+* 2020-03-01  Vaadin 14 - generated the source code by using the Starter Pack.
 * 2019-09-24  Vaadin 14 - generated the source code by using the Starter Pack.
 * 2019-04-29  Vaadin 13 - generated the source code by using the Starter Pack.
 
