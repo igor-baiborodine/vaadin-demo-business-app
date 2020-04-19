@@ -2,24 +2,28 @@ package com.kiroule.vaadin.businessapp.ui.components.navigation.drawer;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Nav;
+import com.vaadin.flow.component.html.UnorderedList;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @CssImport("./styles/components/navi-menu.css")
-public class NaviMenu extends Div {
+public class NaviMenu extends Nav {
 
 	private String CLASS_NAME = "navi-menu";
+	private UnorderedList list;
 
 	public NaviMenu() {
 		setClassName(CLASS_NAME);
+		list = new UnorderedList();
+		add(list);
 	}
 
 	protected void addNaviItem(NaviItem item) {
-		add(item);
+		list.add(item);
 	}
 
 	protected void addNaviItem(NaviItem parent, NaviItem item) {
@@ -64,7 +68,7 @@ public class NaviMenu extends Div {
 	}
 
 	public List<NaviItem> getNaviItems() {
-		List<NaviItem> items = (List) getChildren()
+		List<NaviItem> items = (List) list.getChildren()
 				.collect(Collectors.toList());
 		return items;
 	}

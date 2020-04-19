@@ -28,7 +28,6 @@ public class NaviDrawer extends Div
 
 	private Div mainContent;
 	private TextField search;
-	private Div scrollableArea;
 
 	private Button railButton;
 	private NaviMenu menu;
@@ -56,7 +55,6 @@ public class NaviDrawer extends Div
 		initHeader();
 		initSearch();
 
-		initScrollableArea();
 		initMenu();
 
 		initFooter();
@@ -89,15 +87,9 @@ public class NaviDrawer extends Div
 		mainContent.add(search);
 	}
 
-	private void initScrollableArea() {
-		scrollableArea = new Div();
-		scrollableArea.addClassName(CLASS_NAME + "__scroll-area");
-		mainContent.add(scrollableArea);
-	}
-
 	private void initMenu() {
 		menu = new NaviMenu();
-		scrollableArea.add(menu);
+		mainContent.add(menu);
 	}
 
 	private void initFooter() {

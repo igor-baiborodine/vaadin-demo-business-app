@@ -42,14 +42,6 @@
   width: 100%;
 }
 
-/* Scrollable area */
-.navi-drawer__scroll-area {
-  box-shadow: inset 0 -1px var(--lumo-contrast-10pct);
-  flex: 1;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
 /* Footer button */
 .navi-drawer__footer {
   border-radius: 0;

@@ -1,5 +1,5 @@
 import "@polymer/polymer/lib/mixins/gesture-event-listeners.js";
-import { addListener as addGestureListener } from "@polymer/polymer/lib/utils/gestures.js";
+import {addListener as addGestureListener} from "@polymer/polymer/lib/utils/gestures.js";
 
 const trackElement = function(trackElement, menuElement, callback) {
   addGestureListener(trackElement, "track", e => {

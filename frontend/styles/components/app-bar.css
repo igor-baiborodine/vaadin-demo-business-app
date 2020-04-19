@@ -24,6 +24,7 @@
 /* Title */
 .app-bar__title {
   flex-grow: 1;
+  font-size: var(--lumo-font-size-l);
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;

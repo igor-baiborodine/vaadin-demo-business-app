@@ -8,7 +8,7 @@ public class HomeIT extends AbstractIT {
 
     @Test
     public void homeView() {
-        getDriver().get("http://localhost:8080");
+        getDriver().get(APP_URL);
         DivElement homeView = $(DivElement.class).id("home");
         Assert.assertNotNull(homeView);
     }

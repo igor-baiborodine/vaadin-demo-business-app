@@ -7,22 +7,21 @@ import org.junit.Test;
 
 public class AccountsIT extends AbstractIT {
 
-    private static final String NAVARRO_AVAILABILITY = "64 344,98";
-
     @Test
     public void accountDetailsCorrect() {
-        getDriver().get("http://localhost:8080/accounts");
+        getDriver().get( APP_URL + "/accounts");
         GridElement accountsGrid = $(GridElement.class).id("accounts");
 
         GridTHTDElement availability = accountsGrid.getCell(0, 3);
-        assertNumbers(NAVARRO_AVAILABILITY, availability.getText());
+        String gridViewAvailability = availability.getText();
 
         accountsGrid.getCell(0, 0).click();
 
         TestBenchElement availabilityDetails = $(TestBenchElement.class)
-                .id("availability").$("label").attributeContains("class", "h2")
+                .id("availability").$("label")
+                .attributeContains("class", "list-item__primary")
                 .first();
-        assertNumbers(NAVARRO_AVAILABILITY, availabilityDetails.getText());
+        assertNumbers(gridViewAvailability, availabilityDetails.getText());
     }
 
 }

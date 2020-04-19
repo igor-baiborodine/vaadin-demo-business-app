@@ -36,6 +36,8 @@ public class ListItem extends FlexBoxLayout {
 		this.primary = new Label(primary);
 		this.secondary = UIUtils.createLabel(FontSize.S, TextColor.SECONDARY,
 				secondary);
+		this.primary.setClassName(CLASS_NAME + "__primary");
+		this.secondary.setClassName(CLASS_NAME + "__secondary");
 
 		content = new FlexBoxLayout(this.primary, this.secondary);
 		content.setClassName(CLASS_NAME + "__content");

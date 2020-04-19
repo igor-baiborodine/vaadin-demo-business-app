@@ -1,4 +1,12 @@
 .navi-menu {
-  margin-bottom: var(--lumo-space-s);
-  margin-top: var(--lumo-space-s);
+  box-shadow: inset 0 -1px var(--lumo-contrast-10pct);
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.navi-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: var(--lumo-space-s) 0;
 }
