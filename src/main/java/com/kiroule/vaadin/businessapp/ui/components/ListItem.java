@@ -10,7 +10,6 @@ import com.kiroule.vaadin.businessapp.ui.layout.size.Wide;
 import com.kiroule.vaadin.businessapp.ui.util.FontSize;
 import com.kiroule.vaadin.businessapp.ui.util.TextColor;
 import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
-import com.kiroule.vaadin.businessapp.ui.util.css.FlexDirection;
 import com.kiroule.vaadin.businessapp.ui.util.css.WhiteSpace;
 
 @CssImport("./styles/components/list-item.css")
@@ -36,8 +35,6 @@ public class ListItem extends FlexBoxLayout {
 		this.primary = new Label(primary);
 		this.secondary = UIUtils.createLabel(FontSize.S, TextColor.SECONDARY,
 				secondary);
-		this.primary.setClassName(CLASS_NAME + "__primary");
-		this.secondary.setClassName(CLASS_NAME + "__secondary");
 
 		content = new FlexBoxLayout(this.primary, this.secondary);
 		content.setClassName(CLASS_NAME + "__content");

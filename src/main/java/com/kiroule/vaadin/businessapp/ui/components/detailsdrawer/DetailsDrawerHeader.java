@@ -13,7 +13,6 @@ import com.kiroule.vaadin.businessapp.ui.layout.size.Right;
 import com.kiroule.vaadin.businessapp.ui.layout.size.Vertical;
 import com.kiroule.vaadin.businessapp.ui.util.BoxShadowBorders;
 import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
-import com.kiroule.vaadin.businessapp.ui.util.css.FlexDirection;
 
 public class DetailsDrawerHeader extends FlexBoxLayout {
 

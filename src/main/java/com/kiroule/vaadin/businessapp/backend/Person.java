@@ -17,10 +17,6 @@ public class Person {
 	private int randomInteger;
 	private LocalDate lastModified;
 
-	public Person() {
-
-	}
-
 	public Person(Long id, String firstName, String lastName, Role role,
 	              String email, boolean randomBoolean, int randomInteger,
 	              LocalDate lastModified) {
@@ -38,24 +34,12 @@ public class Person {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
 	public String getLastName() {
 		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
 	}
 
 	public String getName() {
@@ -71,40 +55,20 @@ public class Person {
 		return role;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
 	public String getEmail() {
 		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public boolean getRandomBoolean() {
 		return randomBoolean;
 	}
 
-	public void setRandomBoolean(boolean randomBoolean) {
-		this.randomBoolean = randomBoolean;
-	}
-
 	public int getRandomInteger() {
 		return randomInteger;
 	}
 
-	public void setRandomInteger(int randomInteger) {
-		this.randomInteger = randomInteger;
-	}
-
 	public LocalDate getLastModified() {
 		return lastModified;
-	}
-
-	public void setLastModified(LocalDate lastModified) {
-		this.lastModified = lastModified;
 	}
 
 }

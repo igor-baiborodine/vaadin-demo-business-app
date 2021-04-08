@@ -6,7 +6,6 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.ListItem;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @CssImport("./styles/components/navi-item.css")
-public class NaviItem extends ListItem {
+public class NaviItem extends Div {
 
 	private String CLASS_NAME = "navi-item";
 

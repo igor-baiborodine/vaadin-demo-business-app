@@ -25,6 +25,7 @@ import com.kiroule.vaadin.businessapp.ui.layout.size.*;
 import com.kiroule.vaadin.businessapp.ui.util.*;
 import com.kiroule.vaadin.businessapp.ui.util.css.Position;
 import com.kiroule.vaadin.businessapp.ui.util.css.*;
+import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexDirection;
 
 @CssImport("./styles/views/statistics.css")
 @PageTitle("Statistics")

@@ -4,6 +4,8 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
+import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexDirection;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.kiroule.vaadin.businessapp.ui.MainLayout;
@@ -12,8 +14,6 @@ import com.kiroule.vaadin.businessapp.ui.layout.size.Horizontal;
 import com.kiroule.vaadin.businessapp.ui.layout.size.Right;
 import com.kiroule.vaadin.businessapp.ui.layout.size.Uniform;
 import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
-import com.kiroule.vaadin.businessapp.ui.util.css.FlexDirection;
-import com.kiroule.vaadin.businessapp.ui.util.css.FlexWrap;
 
 @PageTitle("Welcome")
 @Route(value = "", layout = MainLayout.class)

@@ -1,5 +1,8 @@
 package com.kiroule.vaadin.businessapp.ui.views;
 
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
@@ -25,14 +28,18 @@ import com.kiroule.vaadin.businessapp.ui.layout.size.Horizontal;
 import com.kiroule.vaadin.businessapp.ui.layout.size.Right;
 import com.kiroule.vaadin.businessapp.ui.layout.size.Top;
 import com.kiroule.vaadin.businessapp.ui.layout.size.Vertical;
-import com.kiroule.vaadin.businessapp.ui.util.*;
-import com.kiroule.vaadin.businessapp.ui.util.css.*;
+import com.kiroule.vaadin.businessapp.ui.util.FontSize;
+import com.kiroule.vaadin.businessapp.ui.util.LineHeight;
+import com.kiroule.vaadin.businessapp.ui.util.LumoStyles;
+import com.kiroule.vaadin.businessapp.ui.util.TextColor;
+import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
+import com.kiroule.vaadin.businessapp.ui.util.css.BoxSizing;
+import com.kiroule.vaadin.businessapp.ui.util.css.Overflow;
+import com.kiroule.vaadin.businessapp.ui.util.css.PointerEvents;
+import com.kiroule.vaadin.businessapp.ui.util.css.TextOverflow;
 import com.kiroule.vaadin.businessapp.ui.util.css.lumo.BadgeColor;
 import com.kiroule.vaadin.businessapp.ui.util.css.lumo.BadgeShape;
 import com.kiroule.vaadin.businessapp.ui.util.css.lumo.BadgeSize;
-
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @PageTitle("Accounts")
 @Route(value = "accounts", layout = MainLayout.class)
@@ -75,6 +82,8 @@ public class Accounts extends ViewFrame {
 				.setSortable(true);
 		grid.addColumn(new ComponentRenderer<>(this::createOwnerInfo))
 				.setHeader("Owner")
+				.setComparator((account1, account2) ->
+					account1.getOwner().compareToIgnoreCase(account2.getOwner()))
 				.setSortable(true)
 				.setWidth("200px");
 		grid.addColumn(new ComponentRenderer<>(this::createBankInfo))

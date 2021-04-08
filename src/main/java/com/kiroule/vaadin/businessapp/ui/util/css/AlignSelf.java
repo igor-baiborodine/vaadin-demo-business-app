@@ -2,11 +2,8 @@ package com.kiroule.vaadin.businessapp.ui.util.css;
 
 public enum AlignSelf {
 
-	BASLINE("baseline"),
-	CENTER("center"),
-	END("end"),
-	START("start"),
-	STRETCH("stretch");
+	BASLINE("baseline"), CENTER("center"), END("end"), START("start"), STRETCH(
+			"stretch");
 
 	private String value;
 

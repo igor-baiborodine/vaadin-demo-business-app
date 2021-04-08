@@ -404,14 +404,6 @@ public class UIUtils {
 
 	/* === CSS UTILITIES === */
 
-	public static void setAlignItems(AlignItems alignItems,
-	                                Component... components) {
-		for (Component component : components) {
-			component.getElement().getStyle().set("align-items",
-					alignItems.getValue());
-		}
-	}
-
 	public static void setAlignSelf(AlignSelf alignSelf,
 	                                Component... components) {
 		for (Component component : components) {
@@ -451,30 +443,6 @@ public class UIUtils {
 		}
 	}
 
-	public static void setDisplay(Display display, Component... components) {
-		for (Component component : components) {
-			component.getElement().getStyle().set("display", display.getValue());
-		}
-	}
-
-	public static void setFlexGrow(double flexGrow, Component... components) {
-		for (Component component : components) {
-			component.getElement().getStyle().set("flex-grow", String.valueOf(flexGrow));
-		}
-	}
-
-	public static void setFlexShrink(double flexGrow, Component... components) {
-		for (Component component : components) {
-			component.getElement().getStyle().set("flex-shrink", String.valueOf(flexGrow));
-		}
-	}
-
-	public static void setFlexWrap(FlexWrap flexWrap, Component... components) {
-		for (Component component : components) {
-			component.getElement().getStyle().set("flex-wrap", flexWrap.getValue());
-		}
-	}
-
 	public static void setFontSize(FontSize fontSize,
 	                               Component... components) {
 		for (Component component : components) {
@@ -488,12 +456,6 @@ public class UIUtils {
 		for (Component component : components) {
 			component.getElement().getStyle().set("font-weight",
 					fontWeight.getValue());
-		}
-	}
-
-	public static void setJustifyContent(JustifyContent justifyContent, Component... components) {
-		for (Component component : components) {
-			component.getElement().getStyle().set("justify-content", justifyContent.getValue());
 		}
 	}
 

@@ -45,6 +45,13 @@ public class Payments extends SplitViewFrame {
 	private ListDataProvider<Payment> dataProvider;
 	private DetailsDrawer detailsDrawer;
 
+	// Tabs in the drawer
+	Tab details = new Tab("Details");
+	Tab attachments = new Tab("Attachments");
+	Tab history = new Tab("History");
+
+	Tabs tabs = new Tabs(details, attachments, history);
+
 	@Override
 	protected void onAttach(AttachEvent attachEvent) {
 		super.onAttach(attachEvent);
@@ -134,23 +141,9 @@ public class Payments extends SplitViewFrame {
 
 	private DetailsDrawer createDetailsDrawer() {
 		detailsDrawer = new DetailsDrawer(DetailsDrawer.Position.RIGHT);
-
-		// Header
-		Tab details = new Tab("Details");
-		Tab attachments = new Tab("Attachments");
-		Tab history = new Tab("History");
-
-		Tabs tabs = new Tabs(details, attachments, history);
 		tabs.addThemeVariants(TabsVariant.LUMO_EQUAL_WIDTH_TABS);
-		tabs.addSelectedChangeListener(e -> {
-			Tab selectedTab = tabs.getSelectedTab();
-			if (selectedTab.equals(details)) {
-				detailsDrawer.setContent(createDetails(grid.getSelectionModel().getFirstSelectedItem().get()));
-			} else if (selectedTab.equals(attachments)) {
-				detailsDrawer.setContent(createAttachments());
-			} else if (selectedTab.equals(history)) {
-				detailsDrawer.setContent(createHistory());
-			}
+		tabs.addSelectedChangeListener(event -> {
+			configureTabs();
 		});
 
 		DetailsDrawerHeader detailsDrawerHeader = new DetailsDrawerHeader("Payment Details", tabs);
@@ -161,7 +154,7 @@ public class Payments extends SplitViewFrame {
 	}
 
 	private void showDetails(Payment payment) {
-		detailsDrawer.setContent(createDetails(payment));
+		configureTabs();
 		detailsDrawer.show();
 	}
 
@@ -216,5 +209,17 @@ public class Payments extends SplitViewFrame {
 		if (selectedTab != null)
 			dataProvider.setFilterByValue(Payment::getStatus, Payment.Status
 					.valueOf(selectedTab.getLabel().toUpperCase()));
+	}
+
+	private void configureTabs() {
+		Tab selectedTab = tabs.getSelectedTab();
+		if (selectedTab.equals(details)) {
+			detailsDrawer.setContent(
+				createDetails(grid.getSelectionModel().getFirstSelectedItem().get()));
+		} else if (selectedTab.equals(attachments)) {
+			detailsDrawer.setContent(createAttachments());
+		} else if (selectedTab.equals(history)) {
+			detailsDrawer.setContent(createHistory());
+		}
 	}
 }

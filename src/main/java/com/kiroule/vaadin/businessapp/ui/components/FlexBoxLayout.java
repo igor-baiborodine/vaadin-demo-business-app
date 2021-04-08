@@ -15,8 +15,6 @@ public class FlexBoxLayout extends FlexLayout {
 	public static final String BOX_SHADOW = "box-shadow";
 	public static final String BOX_SIZING = "box-sizing";
 	public static final String DISPLAY = "display";
-	public static final String FLEX_DIRECTION = "flex-direction";
-	public static final String FLEX_WRAP = "flex-wrap";
 	public static final String MAX_WIDTH = "max-width";
 	public static final String OVERFLOW = "overflow";
 	public static final String POSITION = "position";
@@ -77,26 +75,10 @@ public class FlexBoxLayout extends FlexLayout {
 		}
 	}
 
-	public void setFlexDirection(FlexDirection direction) {
-		getStyle().set(FLEX_DIRECTION, direction.getValue());
-	}
-
-	public void removeFlexDirection() {
-		getStyle().remove(FLEX_DIRECTION);
-	}
-
 	public void setFlexShrink(String value, Component... components) {
 		for (Component component : components) {
 			component.getElement().getStyle().set("flex-shrink", value);
 		}
-	}
-
-	public void setFlexWrap(FlexWrap wrap) {
-		getStyle().set(FLEX_WRAP, wrap.getValue());
-	}
-
-	public void removeFlexWrap() {
-		getStyle().remove(FLEX_WRAP);
 	}
 
 	public void setMargin(Size... sizes) {

@@ -9,7 +9,7 @@ public class AccountsIT extends AbstractIT {
 
     @Test
     public void accountDetailsCorrect() {
-        getDriver().get( APP_URL + "/accounts");
+        getDriver().get("http://localhost:8080/accounts");
         GridElement accountsGrid = $(GridElement.class).id("accounts");
 
         GridTHTDElement availability = accountsGrid.getCell(0, 3);
@@ -18,8 +18,7 @@ public class AccountsIT extends AbstractIT {
         accountsGrid.getCell(0, 0).click();
 
         TestBenchElement availabilityDetails = $(TestBenchElement.class)
-                .id("availability").$("label")
-                .attributeContains("class", "list-item__primary")
+                .id("availability").$("label").attributeContains("class", "h2")
                 .first();
         assertNumbers(gridViewAvailability, availabilityDetails.getText());
     }

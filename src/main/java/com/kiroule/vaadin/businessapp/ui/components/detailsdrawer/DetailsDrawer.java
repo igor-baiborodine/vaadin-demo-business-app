@@ -3,7 +3,6 @@ package com.kiroule.vaadin.businessapp.ui.components.detailsdrawer;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.kiroule.vaadin.businessapp.ui.components.FlexBoxLayout;
-import com.kiroule.vaadin.businessapp.ui.util.css.FlexDirection;
 
 @CssImport("./styles/components/details-drawer.css")
 public class DetailsDrawer extends FlexBoxLayout {

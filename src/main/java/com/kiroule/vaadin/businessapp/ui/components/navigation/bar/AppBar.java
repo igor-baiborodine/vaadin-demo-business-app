@@ -7,9 +7,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.contextmenu.ContextMenu;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Header;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -18,7 +16,6 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.shared.Registration;
 import com.kiroule.vaadin.businessapp.ui.MainLayout;
 import com.kiroule.vaadin.businessapp.ui.components.FlexBoxLayout;
@@ -27,15 +24,13 @@ import com.kiroule.vaadin.businessapp.ui.components.navigation.tab.NaviTabs;
 import com.kiroule.vaadin.businessapp.ui.util.LumoStyles;
 import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
 import com.kiroule.vaadin.businessapp.ui.views.Home;
-import com.kiroule.vaadin.businessapp.ui.views.Payments;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 import static com.kiroule.vaadin.businessapp.ui.util.UIUtils.IMG_PATH;
 
 @CssImport("./styles/components/app-bar.css")
-public class AppBar extends Header {
+public class AppBar extends FlexBoxLayout {
 
 	private String CLASS_NAME = "app-bar";
 
@@ -44,7 +39,7 @@ public class AppBar extends Header {
 	private Button menuIcon;
 	private Button contextIcon;
 
-	private H1 title;
+	private H4 title;
 	private FlexBoxLayout actionItems;
 	private Image avatar;
 
@@ -101,7 +96,7 @@ public class AppBar extends Header {
 	}
 
 	private void initTitle(String title) {
-		this.title = new H1(title);
+		this.title = new H4(title);
 		this.title.setClassName(CLASS_NAME + "__title");
 	}
 
@@ -182,8 +177,8 @@ public class AppBar extends Header {
 
 	/* === TITLE === */
 
-	public Optional<String> getTitle() {
-		return Optional.ofNullable(this.title.getText());
+	public String getTitle() {
+		return this.title.getText();
 	}
 
 	public void setTitle(String title) {

@@ -206,7 +206,7 @@ public class DummyData {
 			BANK_ACCOUNTS.put(i + startingPoint,
 					new BankAccount(i + startingPoint, getBank(), getIBAN(),
 							getCompany(), getRandomDouble(5000, 100000),
-							getDate(),DummyData.getImageSource()));
+							getDate(), DummyData.getImageSource()));
 		}
 
 		/* === PAYMENTS ==== */

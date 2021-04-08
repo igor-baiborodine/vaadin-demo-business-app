@@ -6,14 +6,13 @@ import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.RouterLayout;
-import com.vaadin.flow.server.ErrorHandler;
-import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.server.*;
 import com.vaadin.flow.theme.lumo.Lumo;
 import com.kiroule.vaadin.businessapp.ui.components.FlexBoxLayout;
 import com.kiroule.vaadin.businessapp.ui.components.navigation.bar.AppBar;
@@ -22,8 +21,6 @@ import com.kiroule.vaadin.businessapp.ui.components.navigation.drawer.NaviDrawer
 import com.kiroule.vaadin.businessapp.ui.components.navigation.drawer.NaviItem;
 import com.kiroule.vaadin.businessapp.ui.components.navigation.drawer.NaviMenu;
 import com.kiroule.vaadin.businessapp.ui.util.UIUtils;
-import com.kiroule.vaadin.businessapp.ui.util.css.Display;
-import com.kiroule.vaadin.businessapp.ui.util.css.FlexDirection;
 import com.kiroule.vaadin.businessapp.ui.util.css.Overflow;
 import com.kiroule.vaadin.businessapp.ui.views.Accounts;
 import com.kiroule.vaadin.businessapp.ui.views.Home;
@@ -47,8 +44,10 @@ import org.slf4j.LoggerFactory;
 @CssImport("./styles/misc/box-shadow-borders.css")
 @CssImport(value = "./styles/styles.css", include = "lumo-badge")
 @JsModule("@vaadin/vaadin-lumo-styles/badge")
+@PWA(name = "Vaadin Demo Business App", shortName = "Vaadin Demo Business App", iconPath = "images/logo-18.png", backgroundColor = "#233348", themeColor = "#233348")
+@Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends FlexBoxLayout
-		implements RouterLayout, AfterNavigationObserver {
+		implements RouterLayout, PageConfigurator, AfterNavigationObserver {
 
 	private static final Logger log = LoggerFactory.getLogger(MainLayout.class);
 	private static final String CLASS_NAME = "root";
@@ -60,7 +59,7 @@ public class MainLayout extends FlexBoxLayout
 	private FlexBoxLayout column;
 
 	private Div appHeaderInner;
-	private Main viewContainer;
+	private FlexBoxLayout viewContainer;
 	private Div appFooterInner;
 
 	private Div appFooterOuter;
@@ -98,11 +97,9 @@ public class MainLayout extends FlexBoxLayout
 	private void initStructure() {
 		naviDrawer = new NaviDrawer();
 
-		viewContainer = new Main();
+		viewContainer = new FlexBoxLayout();
 		viewContainer.addClassName(CLASS_NAME + "__view-container");
-		UIUtils.setDisplay(Display.FLEX, viewContainer);
-		UIUtils.setFlexGrow(1, viewContainer);
-		UIUtils.setOverflow(Overflow.HIDDEN, viewContainer);
+		viewContainer.setOverflow(Overflow.HIDDEN);
 
 		column = new FlexBoxLayout(viewContainer);
 		column.addClassName(CLASS_NAME + "__column");
@@ -211,6 +208,15 @@ public class MainLayout extends FlexBoxLayout
 		}
 		appFooterOuter.removeAll();
 		appFooterOuter.add(components);
+	}
+
+	@Override
+	public void configurePage(InitialPageSettings settings) {
+		settings.addMetaTag("apple-mobile-web-app-capable", "yes");
+		settings.addMetaTag("apple-mobile-web-app-status-bar-style", "black");
+
+		settings.addFavIcon("icon", "frontend/images/favicons/favicon.ico",
+				"256x256");
 	}
 
 	@Override
