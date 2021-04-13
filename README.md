@@ -42,7 +42,7 @@ $ docker build --rm -t business-app .
 $ docker run --name business-app -d business-app
 $ docker logs -f business-app 
 ```
-The application is available at `http://container-ip:8080/`. To get the container IP address, execute the following command:
+The application will be available at `http://container-ip:8080/`. To get the container IP address, execute the following command:
 ```console
 $ docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' business-app
 ```
@@ -50,7 +50,7 @@ Via the host machine on port 80:
 ```console
 $ docker run --name business-app -p 80:8080 -d business-app
 ```
-The application is available at `http://localhost:80/` or `http://host-ip:80/`.
+The application will be available at `http://localhost:80/` or `http://host-ip:80/`.
 
 ... or with an [image from Docker Hub](https://hub.docker.com/r/ibaiborodine/vaadin-business-app):
 ```console

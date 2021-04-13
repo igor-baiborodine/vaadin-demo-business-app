@@ -16,12 +16,12 @@ RUN set -ex; \
 
 RUN mvn clean --batch-mode package -Pproduction -DskipTests; \
     mv /usr/src/app/target/vaadin-demo-business-app-$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout).war \
-        /usr/src/app/target/app.war
+        /usr/src/app/target/ROOT.war
 
 ################################################################################
 # Build stage 1: actual image
 ################################################################################
-FROM openjdk:8-jre-slim
+FROM jetty:9-jre8-slim
 
 LABEL \
     maintainer="Igor Baiborodine <igor@kiroule.com>" \
@@ -30,27 +30,4 @@ LABEL \
     org.label-schema.vcs-url="https://github.com/igor-baiborodine/vaadin-demo-business-app" \
     org.label-schema.usage="https://github.com/igor-baiborodine/vaadin-demo-business-app/blob/master/README.md"
 
-ENV APP_HOME /opt/business
-ENV APP_USER business
-ENV APP_GROUP business
-
-RUN groupadd ${APP_GROUP}; \
-    useradd -g ${APP_GROUP} ${APP_USER}
-
-RUN set -ex; \
-    apt-get update; \
-    apt-get install -y --no-install-recommends \
-        # su tool for easy step-down from root
-        gosu; \
-    rm -rf /var/lib/apt/lists/*; \
-    gosu nobody true
-
-COPY --from=builder --chown=${APP_USER}:${APP_GROUP} /usr/src/app/target/app.war ${APP_HOME}/app.war
-COPY docker-entrypoint.sh /usr/local/bin/
-
-RUN chmod a+x /usr/local/bin/docker-entrypoint.sh
-
-WORKDIR ${APP_HOME}
-ENTRYPOINT ["docker-entrypoint.sh"]
-EXPOSE 8080
-CMD ["bash", "-c", "java -jar $APP_HOME/app.war"]
+COPY --from=builder /usr/src/app/target/ROOT.war ${JETTY_BASE}/webapps/ROOT.war
