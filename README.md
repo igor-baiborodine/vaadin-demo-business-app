@@ -36,7 +36,7 @@ mvn clean
 ```
 before running in the other mode.
 
-# Running the Project in Production Mode with Docker
+## Running the Project in Production Mode with Docker
 ```bash
 $ docker build --rm -t business-app .
 $ docker run --name business-app -d business-app
