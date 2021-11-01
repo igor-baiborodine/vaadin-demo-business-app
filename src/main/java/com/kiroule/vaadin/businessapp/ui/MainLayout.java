@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 @CssImport("./styles/misc/box-shadow-borders.css")
 @CssImport(value = "./styles/styles.css", include = "lumo-badge")
 @JsModule("@vaadin/vaadin-lumo-styles/badge")
-@PWA(name = "Vaadin Demo Business App", shortName = "Vaadin Demo Business App", iconPath = "images/logo-18.png", backgroundColor = "#233348", themeColor = "#233348")
+@PWA(name = "Vaadin Demo Business App", shortName = "Vaadin Demo Business App", iconPath = UIUtils.IMG_PATH + "logos/18.png", backgroundColor = "#233348", themeColor = "#233348")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends FlexBoxLayout
 		implements RouterLayout, PageConfigurator, AfterNavigationObserver {
@@ -214,9 +214,6 @@ public class MainLayout extends FlexBoxLayout
 	public void configurePage(InitialPageSettings settings) {
 		settings.addMetaTag("apple-mobile-web-app-capable", "yes");
 		settings.addMetaTag("apple-mobile-web-app-status-bar-style", "black");
-
-		settings.addFavIcon("icon", "frontend/images/favicons/favicon.ico",
-				"256x256");
 	}
 
 	@Override
